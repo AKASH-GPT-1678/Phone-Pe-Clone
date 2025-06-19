@@ -45,7 +45,7 @@ fun FinanceOffers(){
         ) {
             Image(painter = painterResource( R.drawable.group_3), contentDescription = "image", modifier = Modifier.fillMaxWidth().size(80.dp))
             Spacer(modifier = Modifier.height(10.dp))
-            Image(painter = painterResource( R.drawable.group1), contentDescription = "image", modifier = Modifier.fillMaxWidth().width(80.dp).height(160.dp))
+            Image(painter = painterResource( R.drawable.group_6), contentDescription = "image", modifier = Modifier.fillMaxWidth().size(width = 80.dp , height = 160.dp))
 //            Image(painter = painterResource( R.drawable.group1), contentDescription = "image", modifier = Modifier.fillMaxWidth().size(80.dp))
 
 
