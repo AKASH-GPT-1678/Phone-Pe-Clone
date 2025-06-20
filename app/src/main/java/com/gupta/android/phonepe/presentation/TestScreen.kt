@@ -19,7 +19,7 @@ fun TestScreen() {
     LazyColumn {
 
         item {
-            TicketHeader()
+          TicketHeader()
         }
         item {
             MoneyTransferSection()

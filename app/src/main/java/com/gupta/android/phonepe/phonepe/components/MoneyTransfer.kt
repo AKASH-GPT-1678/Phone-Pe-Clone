@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -35,15 +36,15 @@ fun MoneyTransferSection(){
 
         Row (
             modifier = Modifier.padding(horizontal = 20.dp),
-//            horizontalArrangement = Arrangement.SpaceBetween(10.dp)
+            horizontalArrangement = Arrangement.spacedBy(14.dp)
         ) {
             val imagePainter = painterResource(id = R.drawable.phone_og)
 
 
-            Service(image =imagePainter, text1 = "Check" , text2 = "Balance")
-            Service(image =imagePainter, text1 = "Check" , text2 = "Balance")
-            Service(image =imagePainter, text1 = "Check" , text2 = "Balance")
-            Service(image =imagePainter, text1 = "Check" , text2 = "Balance")
+            Service(image =R.drawable.phone_money, text1 = "Check" , text2 = "Balance")
+            Service(image =R.drawable.bank_transfer, text1 = "Check" , text2 = "Balance")
+            Service(image =R.drawable.announcement, text1 = "Check" , text2 = "Balance")
+            Service(image = R.drawable.balance, text1 = "Check" , text2 = "Balance")
 
 
 
@@ -55,41 +56,28 @@ fun MoneyTransferSection(){
 
 @Composable
 fun Service(
-    image: Painter,
+    image: Int,
     text1: String,
     text2: String
 ){
-    Column(
-        modifier = Modifier.padding(10.dp)
+
+    Column (
+        horizontalAlignment = Alignment.CenterHorizontally
+    ){
 
 
-        ,
-        horizontalAlignment =  Alignment.CenterHorizontally
-
-    ) {
-
-        Box(
-            modifier = Modifier
-                .clip(CircleShape)
-                .size(50.dp)
-
-            ,
-        ){
+        Surface {
             Image(
-                painter = image,
-
-                contentDescription = "image",
-                modifier = Modifier
-                    .size(50.dp)
-
+                painter = painterResource(image),
+                contentDescription = "label",
+                modifier = Modifier.padding(10.dp)
             )
-
         }
-
-
         Text(text = text1)
         Text(text = text2)
     }
+
+
 
 }
 
