@@ -84,3 +84,7 @@ fun TicketHeader(){
     }
 
 }
+
+fun SearchBarPayment(){
+
+}
