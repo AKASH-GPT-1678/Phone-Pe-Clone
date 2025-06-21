@@ -2,6 +2,7 @@ package com.gupta.android.phonepe.phonepe.components.banktransfer
 
 import android.media.Image
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -25,11 +26,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.util.Consumer
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 
 
-@Preview
+
 @Composable
-fun SendMoneyIntro(){
+fun SendMoneyIntro(
+    onSelfacountClick : ()-> Unit,
+    onBankAccountClick : ()-> Unit,
+    onUPIAppClick : ()-> Unit
+){
     Column (
         modifier = Modifier.padding(top = 40.dp)
     ) {
@@ -63,9 +71,38 @@ fun SendMoneyIntro(){
                 modifier = Modifier.size(160.dp)
             )
         }
-        TypeofBankPayment(image = R.drawable.phone_og, type = "To Self Bank Account" , savedaccounts = "1 Saved accounts")
-        TypeofBankPayment(image = R.drawable.bank_transfer, type = "To Account Number & IFSC" , savedaccounts = "4 Saved accounts")
-        TypeofBankPayment(image = R.drawable.announcement, type = "To Any UPI App" , savedaccounts = "2 saved UPI IDs / numbers")
+        TypeofBankPayment(image = R.drawable.phone_og, type = "To Self Bank Account" , savedaccounts = "1 Saved accounts", onTypeClick = onSelfacountClick )
+        TypeofBankPayment(image = R.drawable.bank_transfer, type = "To Account Number & IFSC" , savedaccounts = "4 Saved accounts", onTypeClick = onBankAccountClick )
+        TypeofBankPayment(image = R.drawable.announcement, type = "To Any UPI App" , savedaccounts = "2 saved UPI IDs / numbers", onTypeClick = onUPIAppClick)
+    }
+}
+
+@Composable
+fun BankTransferNavigation(){
+    val navController = rememberNavController();
+    NavHost(
+        navController = navController,
+        startDestination = BankNavigation.IntroScreeen.name
+    ){
+
+        composable(route = BankNavigation.IntroScreeen.name) {
+            SendMoneyIntro(
+                onBankAccountClick = {
+                    navController.navigate(BankNavigation.TransferScreen.name)
+                },
+                onSelfacountClick = {
+                    navController.navigate(BankNavigation.TransferScreen.name)
+                },
+                onUPIAppClick = {
+                    navController.navigate(BankNavigation.TransferScreen.name)
+                }
+            )
+
+        }
+        composable(route = BankNavigation.TransferScreen.name) {
+            BankTransfers()
+        }
+
     }
 }
 
@@ -75,11 +112,16 @@ fun SendMoneyIntro(){
 fun TypeofBankPayment(
     image: Int,
     type : String,
-    savedaccounts : String
+    savedaccounts : String,
+    onTypeClick : () -> Unit
 ){
     Column {
         Row (
-            modifier = Modifier.padding(horizontal = 14.dp).padding(vertical = 20.dp),
+            modifier = Modifier.padding(horizontal = 14.dp).padding(vertical = 20.dp)
+                .clickable(onClick = onTypeClick)
+
+            ,
+
             verticalAlignment = Alignment.CenterVertically
         ){
             Image(

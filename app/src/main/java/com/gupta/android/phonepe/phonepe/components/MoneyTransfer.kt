@@ -34,7 +34,9 @@ import java.nio.file.WatchEvent
 
 @Composable
 fun MoneyTransferSection(
-    onMoneytransfer: () -> Unit
+    onMoneytransfer: () -> Unit,
+    onBanktransfer: ()-> Unit,
+    onReferEarn: ()-> Unit
 
 ){
     val navController = rememberNavController()
@@ -53,6 +55,8 @@ fun MoneyTransferSection(
 
 
             Service(image =R.drawable.phone_money, text1 = "To Mobile" , text2 = "Numbers", onImageClick = onMoneytransfer)
+            Service(image =R.drawable.bank_transfer, text1 = "To Bank &" , text2 = "Selft A/c", onImageClick = onBanktransfer)
+            Service(image =R.drawable.announcement, text1 = "Refer & Get" , text2 = "Upto 200", onImageClick = onReferEarn)
 
 
 

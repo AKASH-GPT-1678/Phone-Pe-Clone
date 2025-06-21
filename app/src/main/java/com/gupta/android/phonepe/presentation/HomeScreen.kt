@@ -16,7 +16,9 @@ import com.gupta.android.phonepe.phonepe.components.TicketHeader
 @Composable
 fun HomeScreen(
     navController: NavController,
-    onMoneyCLick : () -> Unit
+    onMoneyCLick : () -> Unit,
+    onBanktransferClick : () -> Unit,
+    onReferandEarn : ()-> Unit
 
 ){
 
@@ -26,7 +28,7 @@ fun HomeScreen(
             TicketHeader()
         }
         item {
-            MoneyTransferSection( onMoneytransfer = onMoneyCLick )
+            MoneyTransferSection( onMoneytransfer = onMoneyCLick , onBanktransfer = onBanktransferClick, onReferEarn = onReferandEarn )
         }
         item {
             FinanceOffers()

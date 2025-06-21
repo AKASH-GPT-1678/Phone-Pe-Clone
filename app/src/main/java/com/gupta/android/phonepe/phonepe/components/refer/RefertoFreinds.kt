@@ -27,6 +27,9 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.gupta.android.phonepe.R
 
 
@@ -107,4 +110,19 @@ fun ReferandEarnPage(){
         }
 
     }
+}
+
+@Composable
+fun NavigationReferEarn(){
+    val navController = rememberNavController()
+    NavHost(
+        navController = navController,
+        startDestination = ReferNavigation.IntroScreen.name
+    ){
+        composable(route = ReferNavigation.IntroScreen.name) {
+            ReferandEarnPage()
+        }
+
+    }
+
 }

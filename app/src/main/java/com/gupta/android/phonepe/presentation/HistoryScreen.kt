@@ -41,7 +41,6 @@ fun HistoryScreen(){
 
 
 
-
 @Preview
 @Composable
 fun SearchHeader(){
@@ -132,7 +131,6 @@ fun SearchHeader(){
 }
 
 
-//@Preview
 @Composable
 fun Transaction(
     isDebit : Boolean,
