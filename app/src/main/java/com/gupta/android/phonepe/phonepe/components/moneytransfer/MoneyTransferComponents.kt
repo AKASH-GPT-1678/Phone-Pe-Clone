@@ -1,7 +1,5 @@
-package com.gupta.android.phonepe.phonepe.components
+package com.gupta.android.phonepe.phonepe.components.moneytransfer
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -26,13 +24,20 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.gupta.android.phonepe.R
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHost
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 
-@Preview
+
 @Composable
-fun MoneyTransferByNumber(){
+fun MoneyTransferByNumber(
+    onSearchClick : ()-> Unit
+){
 
     val isVisible = true;
     val showSendMoney = true;
+
     Column (
         modifier = Modifier.padding(horizontal = 20.dp)
     ){
@@ -81,11 +86,32 @@ fun MoneyTransferByNumber(){
         Spacer(modifier = Modifier.height(14.dp))
 
 
-        SearchSectiontransfer()
+        SearchSectiontransfer(placeholder = "Search for any name or number", onSearchClick = onSearchClick)
     }
 
 }
 
+@Composable
+fun MoneyTransferNavigation(){
+    val navController = rememberNavController()
+
+    NavHost( navController = navController,
+        startDestination = "Moneytransfer"
+    ){
+
+        composable("Moneytransfer") {
+            MoneyTransferByNumber(onSearchClick = {
+                navController.navigate("Payment")
+            })
+        }
+        composable(
+            "Payment"
+        ) {
+            SearchForPay()
+        }
+
+    }
+}
 
 @Composable
 fun SendMoneyUPI(){
@@ -120,7 +146,10 @@ fun SendMoneyUPI(){
 
 
 @Composable
-fun SearchSectiontransfer(){
+fun SearchSectiontransfer(
+    placeholder : String,
+    onSearchClick: () -> Unit
+){
     Surface(
         modifier = Modifier.fillMaxWidth()
             .height(60.dp)
@@ -129,6 +158,7 @@ fun SearchSectiontransfer(){
 
         ,
         shape = RoundedCornerShape(36.dp),
+        onClick = onSearchClick,
 
 
         color = Color(0xFFE6DDEF)
@@ -144,7 +174,7 @@ fun SearchSectiontransfer(){
 
             Spacer(modifier = Modifier.width(16.dp))
 
-            Text(text = "Search any mobile number", fontSize = 16.sp , color = Color.Gray)
+            Text(text = placeholder, fontSize = 16.sp , color = Color.Gray)
 
             Spacer(modifier = Modifier.weight(1f))
 

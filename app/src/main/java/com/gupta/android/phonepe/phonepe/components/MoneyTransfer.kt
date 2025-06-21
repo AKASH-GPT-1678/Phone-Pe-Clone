@@ -3,6 +3,7 @@ package com.gupta.android.phonepe.phonepe.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,11 +24,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.gupta.android.phonepe.R
+import com.gupta.android.phonepe.phonepe.components.moneytransfer.MoneyTransferByNumber
+import com.gupta.android.phonepe.phonepe.components.moneytransfer.NavigationMoney
 import java.nio.file.WatchEvent
 
 @Composable
-fun MoneyTransferSection(){
+fun MoneyTransferSection(
+    onMoneytransfer: () -> Unit
+
+){
+    val navController = rememberNavController()
     Column (
         modifier = Modifier.padding(horizontal = 20.dp , vertical = 10.dp)
     ) {
@@ -35,16 +45,14 @@ fun MoneyTransferSection(){
         Text(text = "Money Transfers" , fontWeight = FontWeight.Bold , fontSize = 20.sp)
 
         Row (
-//            modifier = Modifier.padding(horizontal = 20.dp),
+
             horizontalArrangement = Arrangement.spacedBy(14.dp)
         ) {
             val imagePainter = painterResource(id = R.drawable.phone_og)
 
 
-            Service(image =R.drawable.phone_money, text1 = "To Mobile" , text2 = "Numbers")
-            Service(image =R.drawable.bank_transfer, text1 = "To Bank & " , text2 = "Self A/c")
-            Service(image =R.drawable.announcement, text1 = "Refer & Get" , text2 = "Upto 200")
-            Service(image = R.drawable.balance, text1 = "Check" , text2 = "Balance")
+
+            Service(image =R.drawable.phone_money, text1 = "To Mobile" , text2 = "Numbers", onImageClick = onMoneytransfer)
 
 
 
@@ -58,7 +66,8 @@ fun MoneyTransferSection(){
 fun Service(
     image: Int,
     text1: String,
-    text2: String
+    text2: String,
+    onImageClick : ()-> Unit
 ){
 
     Column (
@@ -72,6 +81,7 @@ fun Service(
                 contentDescription = "label",
                 modifier = Modifier.padding(10.dp)
                     .size(64.dp)
+                    .clickable(onClick = onImageClick)
             )
         }
         Text(text = text1)
@@ -85,5 +95,5 @@ fun Service(
 @Preview
 @Composable
 fun PreviewSection(){
-    MoneyTransferSection()
+
 }

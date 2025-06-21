@@ -50,6 +50,8 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     testImplementation(libs.junit)
+    val nav_version = "2.9.0"
+    implementation("androidx.navigation:navigation-compose:$nav_version")
     implementation("androidx.constraintlayout:constraintlayout:2.2.1")
     implementation("androidx.constraintlayout:constraintlayout-compose:1.1.1")
     androidTestImplementation(libs.androidx.junit)
